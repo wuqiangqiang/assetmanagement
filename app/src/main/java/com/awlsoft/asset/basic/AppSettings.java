@@ -50,11 +50,20 @@ public class AppSettings {
         PreferencesUtils.putBoolean(context, "sync_allow", completed);
     }
 
-    //下次是否需要登录
+    /**
+     * 下次是否需要登录
+     * @param context
+     * @return
+     */
     public static boolean getNeedLogin(Context context){
         return PreferencesUtils.getBoolean(context, "need_login", true);
     }
 
+    /**
+     * 设置need_login的字符串形式的boolean值
+     * @param context
+     * @param needLogin
+     */
     public static void setNeedLogin(Context context, boolean needLogin){
         PreferencesUtils.putBoolean(context, "need_login", needLogin);
     }

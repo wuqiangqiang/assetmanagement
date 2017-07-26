@@ -13,7 +13,7 @@ public interface LoginContract {
 
         Activity getActivity();
 
-        void showMessage(String message);
+        abstract void showMessage(String message);
 
         void setLoadingIndicator(boolean active);
 

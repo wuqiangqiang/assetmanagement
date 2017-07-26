@@ -86,6 +86,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         }
     }
 
+    /**
+     * '设置登录历史
+     */
     private void setupHistory() {
         List<String> usernames = AppSettings.getUserNames(this);
         final ArrayList<ComImgTextInfo> infoList = new ArrayList<>();
@@ -109,7 +112,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
         }
 
-
+        //infoList绑定到mListWindow
         mListWindow = new ListChooseWindow(this, infoList).createWindow();
         mListWindow.setBackgroundRes(R.drawable.light_grey_stroke_slide_bg);
         mListWindow.setCallBack(new CommCallBack() {
@@ -153,6 +156,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     public void showMessage(String message) {
         showToast(message);
     }
+
 
     @Override
     public void setLoadingIndicator(boolean active) {

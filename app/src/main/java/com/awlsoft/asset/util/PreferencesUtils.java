@@ -236,9 +236,9 @@ public class PreferencesUtils {
      * get boolean preferences
      * 
      * @param context
-     * @param key The name of the preference to retrieve
+     * @param key The name of the preference to retrieve检索
      * @param defaultValue Value to return if this preference does not exist
-     * @return The preference value if it exists, or defValue. Throws ClassCastException if there is a preference with
+     * @return The preference偏爱 value if it exists, or defValue. Throws ClassCastException if there is a preference with
      *         this name that is not a boolean
      */
     public static boolean getBoolean(Context context, String key, boolean defaultValue) {
