@@ -65,7 +65,7 @@ public class LoginPresenter implements LoginContract.Presenter {
             @Override
             public void onNext(@NonNull UserResponse userResponse) {
                 mView.loginSuccess(userResponse);
-                //保存服务器地址
+                //保存服务器地址到SharedPreferences
                 if (!AppSettings.getServerAddress(mView.getActivity()).equals(server)) {
                     AppSettings.setServerAddress(mView.getActivity(), server);
                 }

@@ -16,6 +16,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
 
     public BaseObserver() {
+
     }
 
     @Override
