@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:theme="@style/AppTheme.AppBarOverlay" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="50dp"
+        android:padding="10dp">
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:max="100"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/progressbar"
+            android:layout_below="@id/progressbar"
+            android:text="0%" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/progressbar"
+            android:layout_below="@id/progressbar"
+            android:text="100%" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:gravity="center_horizontal">
+
+        <com.awlsoft.asset.ui.widget.DrawableCenterTextView
+            android:id="@+id/upload_asset"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:background="@drawable/grid_item_bg"
+            android:drawableTop="@drawable/ic_upload"
+            android:gravity="center_horizontal"
+            android:text="数据上传" />
+
+        <com.awlsoft.asset.ui.widget.DrawableCenterTextView
+            android:id="@+id/sync_data"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/grid_item_bg"
+            android:drawableTop="@drawable/ic_download"
+            android:gravity="center_horizontal"
+            android:text="数据下载" />
+    </LinearLayout>
+
+</RelativeLayout>
