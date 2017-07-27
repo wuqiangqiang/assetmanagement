@@ -79,9 +79,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         });
         setupHistory();
 
+        //判断是否需要登录
         if(AppSettings.getNeedLogin(this)){
 
-        }else{
+        }else{//不需要登录
             mPresenter.loginWithOutValidate();
         }
     }

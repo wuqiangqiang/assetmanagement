@@ -125,7 +125,7 @@ public class RfidManager {
                 .getCurOperateTagISO18000Buffer();
 
         mReader.getOutputPower(m_curReaderSetting.btReadId);
-
+        //16进制
         byte btOutputPower = 0x00;
 
         btOutputPower = (byte) endDBM;

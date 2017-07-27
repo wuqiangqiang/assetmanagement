@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 /**
+ * 可拉的中心TextView
  * Created by yejingxian on 2017/5/23.
  */
 

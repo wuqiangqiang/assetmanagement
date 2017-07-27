@@ -57,8 +57,7 @@ public class DBManager {
         }
         return mInstance;
     }
-
-    //清空同步下载的数据
+     //清空同步下载的数据
     public void clearAllSyncData(){
         mDaoSession.getAdminResponseDao().deleteAll();
         mDaoSession.getWorkareaResponseDao().deleteAll();

@@ -13,7 +13,7 @@ public interface LoginContract {
 
         Activity getActivity();
 
-        abstract void showMessage(String message);
+        void showMessage(String message);
 
         void setLoadingIndicator(boolean active);
 
@@ -27,6 +27,9 @@ public interface LoginContract {
 
     }
 
+    /**
+     * 定义了登录、登出抽象方法
+     */
     interface Presenter extends BasePresenter {
 
         void login(@NonNull final String server, @NonNull String username, @NonNull String password);
