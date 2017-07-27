@@ -40,7 +40,7 @@ public class AssetAddRfidAdapter extends CommonAdapter<WrapInventoryTagMap> {
         holder.setText(R.id.rfid_tv, RfidUtils.parseRfidEPC(wrapInventoryTagMap.inventoryTagMap));
         holder.getConvertView().setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 if(clickAble){
                     clickItem(wrapInventoryTagMap);
                 }

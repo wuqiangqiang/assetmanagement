@@ -53,7 +53,7 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
     private TextView mAssetBatch, mBrandName, mCategoryGbName, mCategoryName, mModelName, mBuyDate;
     private View mBatchContainer, mBrandContainer, mCategoryGbContainer, mCategoryContainer, mModelContainer, mBuyDateContainer;
     private Button mCommit;
-    private ListView mListView;
+    private ListView mListView;//m（member） 则表示的是成员变量
     private TextView scanCount, createName, selectAll;
 
     private AssetBatchResponse mBatch;
@@ -124,7 +124,9 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
         createName.setText(getString(R.string.create_name, user.getName()));
         scanCount.setText(getString(R.string.scan_count, 0));//共扫描到%1$d条数据
         selectAll.setOnClickListener(this);
-
+        /**
+         * 扫描到的RFID列表
+         */
         mListView = (ListView) findViewById(R.id.rfid_list);
         mInventoryTagMaps = new ArrayList<>();
         mAdapter = new AssetAddRfidAdapter(this, mInventoryTagMaps);
