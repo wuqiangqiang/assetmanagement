@@ -23,6 +23,11 @@ public interface AssetAddContract {
     interface View extends BaseView<Presenter> {
         Activity getActivity();
         void showRfids(List<InventoryBuffer.InventoryTagMap> inventoryTagMap);
+
+        /**
+         * 定义抽象方法展示批次号列表
+         * @param batchs
+         */
         void showBatch(List<AssetBatchResponse> batchs);
         void showBrand(List<BrandResponse> brand);
         void showCategory(List<CategoryResponse> categorys);

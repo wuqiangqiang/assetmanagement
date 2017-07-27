@@ -17,6 +17,7 @@ import okhttp3.HttpUrl;
  */
 
 public class LoginUtils {
+
     public static UserResponse loginIfNoYet(Activity activity) {
         if (AssetApplication.get(activity).getUser() == null) {
             Intent intent = new Intent(activity, LoginActivity.class);

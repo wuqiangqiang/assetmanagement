@@ -97,7 +97,7 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
 
         mAssetBatch = (TextView) findViewById(R.id.batch_context);
         mBrandName = (TextView) findViewById(R.id.brand_context);
-        mCategoryName = (TextView) findViewById(R.id.category_context);
+        mCategoryName = (TextView) findViewById(R.id.category_context);//
         mCategoryGbName = (TextView) findViewById(R.id.categoryGb_context);
         mModelName = (TextView) findViewById(R.id.model_context);
         mBuyDate = (TextView) findViewById(R.id.buy_date_context);
@@ -122,7 +122,7 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
         selectAll = (TextView) findViewById(R.id.select_all_none);
         createName = (TextView) findViewById(R.id.create_name);
         createName.setText(getString(R.string.create_name, user.getName()));
-        scanCount.setText(getString(R.string.scan_count, 0));
+        scanCount.setText(getString(R.string.scan_count, 0));//共扫描到%1$d条数据
         selectAll.setOnClickListener(this);
 
         mListView = (ListView) findViewById(R.id.rfid_list);
@@ -132,6 +132,7 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
 
     }
 
+    //重写activity类的 onOptionsItemSelected(MenuItem)回调方法，每当有菜单项被点击时，android就会调用该方法，并传入被点击菜单项
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -330,7 +331,7 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
                 mBatch = batchs.get(i);
                 mAssetBatch.setText(mBatch.getBatchNo());
             }
-        }).setPositiveButton("自动生成", new DialogInterface.OnClickListener() {
+        }).setPositiveButton("自动生成", new DialogInterface.OnClickListener() {//positive 积极的、正数
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 mAutoBatch = String.valueOf(System.currentTimeMillis());
