@@ -46,7 +46,7 @@ public class InventoryTaskPresenter implements InventoryTaskContract.Presenter {
         Observable
                 .create(new ObservableOnSubscribe<List<InventoryResponse>>() {
                     @Override
-                    public void subscribe(@io.reactivex.annotations.NonNull ObservableEmitter<List<InventoryResponse>> e) throws Exception {
+                    public void subscribe(@io.reactivex.annotations.NonNull ObservableEmitter<List<InventoryResponse>> e) throws Exception {//emitter:发射器
                         List<InventoryResponse> tasks = mManager.getDaoSession().getInventoryResponseDao().queryBuilder().list();
                         e.onNext(tasks);
                         e.onComplete();

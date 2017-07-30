@@ -170,6 +170,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void loginSuccess(UserResponse user) {
+        //将当前登录用户保存到Application
         AssetApplication.get(this).setUser(user);
         //下次无需登录
         AppSettings.setNeedLogin(this,false);

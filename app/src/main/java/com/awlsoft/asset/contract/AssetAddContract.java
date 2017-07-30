@@ -20,6 +20,10 @@ import java.util.List;
 
 public interface AssetAddContract {
 
+    /**
+     * Activity去实现
+     * BaseView只有void setPresenter(T presenter);
+     */
     interface View extends BaseView<Presenter> {
         Activity getActivity();
         void showRfids(List<InventoryBuffer.InventoryTagMap> inventoryTagMap);
@@ -35,6 +39,9 @@ public interface AssetAddContract {
         void showModel(List<ModelResponse> models);
     }
 
+    /**
+     * 由专门的Presenter类去实现
+     */
     interface Presenter extends BasePresenter {
         void saveAssets(List<AssetAddBean> assets);
         void openDriver();
@@ -45,6 +52,11 @@ public interface AssetAddContract {
         void loadBatch();
         void loadBrand();
         void loadCategory();
+
+        /**
+         * 加载<p>国标类型</p>
+         * 实现类的方法体是View接口的  showCategoryBb(List<CategoryGbResponse> categoryGbList)
+         */
         void loadCategoryGb();
         void loadModel();
     }

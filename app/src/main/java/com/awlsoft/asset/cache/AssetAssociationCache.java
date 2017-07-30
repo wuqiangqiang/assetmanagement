@@ -104,6 +104,10 @@ public class AssetAssociationCache {
         this.mManager = manager;
     }
 
+    /**
+     * 同步协会
+     * @param cb
+     */
     public void syncAssociation(Callback cb) {
         sync_count = 15;
         mCallback = cb;
@@ -131,7 +135,7 @@ public class AssetAssociationCache {
 
     /**
      * 同步管理员
-     *
+     * compose 组成
      * @param user
      */
     private void syncAdmin(final UserResponse user) {
@@ -400,7 +404,7 @@ public class AssetAssociationCache {
 
     /**
      * 同步领用申请
-     *
+     * 網絡下載到本地數據庫，後面其它模塊都從本地數據庫獲取數據
      * @param user
      */
     private void syncRecivieTask(final UserResponse user) {

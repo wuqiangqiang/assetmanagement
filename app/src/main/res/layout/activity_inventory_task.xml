@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="8dp"
-                android:text="无盘点任务！" />
+                android:text="没有盘点任务！" />
         </LinearLayout>
     </RelativeLayout>
 

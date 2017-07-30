@@ -48,8 +48,8 @@ import java.util.List;
  */
 
 public class AssetAddActivity extends BaseActivity implements AssetAddContract.View, View.OnClickListener {
-    private EditText mAssetName, mDurableYears, mPrice;
 
+    private EditText mAssetName, mDurableYears, mPrice;
     private TextView mAssetBatch, mBrandName, mCategoryGbName, mCategoryName, mModelName, mBuyDate;
     private View mBatchContainer, mBrandContainer, mCategoryGbContainer, mCategoryContainer, mModelContainer, mBuyDateContainer;
     private Button mCommit;
@@ -60,6 +60,9 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
     private CategoryGbResponse mCategoryGb;
     private CategoryResponse mCategory;
     private ModelResponse mModel;
+    /**
+     * 品牌
+     */
     private BrandResponse mBrand;
     private String mBuyDay;
     private String mAutoBatch;
@@ -88,6 +91,9 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
 
         user = LoginUtils.loginIfNoYet(this);
         rfidManager = new RfidManager(this);
+        /**
+         * mPresenter对象提供了一些方法
+         */
         mPresenter = new AssetAddPresenter(this, DBManager.getInstance(this), rfidManager);
         mPresenter.openDriver();
 
@@ -314,6 +320,7 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
                 mInventoryTagMaps.add(new WrapInventoryTagMap(inventoryTagMaps.get(i)));
             }
             foundRfidCount = inventoryTagMaps.size();
+            //scanCount.setText(getString(R.string.scan_count, mInventoryTagMaps.size()));
             scanCount.setText(getString(R.string.scan_count, mInventoryTagMaps.size()));
             mAdapter.notifyDataSetChanged();
         }
@@ -321,7 +328,8 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
 
     @Override
     public void showBatch(final List<AssetBatchResponse> batchs) {
-        new AlertDialog.Builder(this).setAdapter(new CommonAdapter<AssetBatchResponse>(this, batchs, android.R.layout.simple_list_item_1) {
+        new AlertDialog.Builder(this)
+                .setAdapter(new CommonAdapter<AssetBatchResponse>(this, batchs, android.R.layout.simple_list_item_1) {
             @Override
             public void convert(ViewHolder holder, AssetBatchResponse assetBatchResponse) {
                 holder.setText(android.R.id.text1, assetBatchResponse.getBatchNo());
@@ -333,7 +341,8 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
                 mBatch = batchs.get(i);
                 mAssetBatch.setText(mBatch.getBatchNo());
             }
-        }).setPositiveButton("自动生成", new DialogInterface.OnClickListener() {//positive 积极的、正数
+        })
+                .setPositiveButton("自动生成", new DialogInterface.OnClickListener() {//positive 积极的、正数
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 mAutoBatch = String.valueOf(System.currentTimeMillis());
@@ -342,6 +351,10 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
         }).show();
     }
 
+    /**
+     * View中的抽象方法，该实现在Presenter类的loadBrand方法中被调用
+     * @param brand
+     */
     @Override
     public void showBrand(final List<BrandResponse> brand) {
         new AlertDialog.Builder(this).setAdapter(new CommonAdapter<BrandResponse>(this, brand, android.R.layout.simple_list_item_1) {

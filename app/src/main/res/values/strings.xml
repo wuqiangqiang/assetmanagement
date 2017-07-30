@@ -12,7 +12,7 @@
     <string name="activity_inventory_detail">盘点列表详情</string>
     <string name="activity_inventory_start">开始盘点</string>
     <string name="create_name">操作人:%1$s</string>
-    <string name="scan_count">共扫描到%1$d条数据</string>
+    <string name="scan_count">共扫描到%1$6d条数据</string><!--%n$md：代表输出的是整数，n代表是第几个参数，设置m的值可以在输出之前放置空格-->
     <string name="action_scan">扫描</string>
     <string name="action_bind">绑定</string>
     <string name="action_commit">提交</string>

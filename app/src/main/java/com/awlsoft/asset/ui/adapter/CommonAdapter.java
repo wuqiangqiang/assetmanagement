@@ -10,6 +10,10 @@ import com.awlsoft.asset.ui.adapter.viewholder.ViewHolder;
 
 import java.util.List;
 
+/**
+ * 批次号列表适配器
+ * @param <T>
+ */
 public abstract class CommonAdapter<T> extends BaseAdapter {
     protected Context mContext;
     protected List<T> mDatas;
@@ -40,8 +44,7 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = ViewHolder.get(mContext, convertView, parent,
-                layoutId, position);
+        ViewHolder holder = ViewHolder.get(mContext, convertView, parent, layoutId, position);
         convert(holder, getItem(position));
         return holder.getConvertView();
     }

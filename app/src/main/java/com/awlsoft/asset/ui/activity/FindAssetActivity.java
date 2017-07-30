@@ -126,8 +126,6 @@ public class FindAssetActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
 
-
-
             }
 
             @Override

@@ -299,6 +299,11 @@ public class RfidManager {
         return 0;
     }
 
+    /**
+     * <h1>获取扫描到的List</h1>
+     * <br>InventoryTagMap是一个静态类
+     * @return
+     */
     public List<InventoryBuffer.InventoryTagMap> getInventory() {
         List<InventoryBuffer.InventoryTagMap> lsTagList;
         if (m_curInventoryBuffer == null) {

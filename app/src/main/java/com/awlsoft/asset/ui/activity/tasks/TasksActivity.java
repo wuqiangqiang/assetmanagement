@@ -71,6 +71,9 @@ public class TasksActivity extends BaseActivity implements TasksContract.View, T
 
     }
 
+    /**
+     * onStart可见与onStop不可见
+     */
     @Override
     protected void onStart() {
         super.onStart();

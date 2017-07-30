@@ -42,6 +42,7 @@ public class DaoMaster extends AbstractDaoMaster {
         UserResponseDao.createTable(db, ifNotExists);
         WorkareaResponseDao.createTable(db, ifNotExists);
         TaskAssetFoundDao.createTable(db, ifNotExists);
+        GreenDaoResponseDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -67,6 +68,7 @@ public class DaoMaster extends AbstractDaoMaster {
         UserResponseDao.dropTable(db, ifExists);
         WorkareaResponseDao.dropTable(db, ifExists);
         TaskAssetFoundDao.dropTable(db, ifExists);
+        GreenDaoResponseDao.dropTable(db, ifExists);
     }
 
     /**
@@ -106,6 +108,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(UserResponseDao.class);
         registerDaoClass(WorkareaResponseDao.class);
         registerDaoClass(TaskAssetFoundDao.class);
+        registerDaoClass(GreenDaoResponseDao.class);
     }
 
     public DaoSession newSession() {

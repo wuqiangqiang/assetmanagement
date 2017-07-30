@@ -88,7 +88,7 @@ public class TasksPresenter implements TasksContract.Presenter{
                         e.onComplete();
                     }
                 })
-                .compose(ObservableTransformerUtils.<List<BaseTaskResponse>>io_main())
+                .compose(ObservableTransformerUtils.<List<BaseTaskResponse>>io_main())//组成
                 .doFinally(new Action() {
                     @Override
                     public void run() throws Exception {

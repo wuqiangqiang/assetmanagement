@@ -53,16 +53,21 @@ public class AssetAddPresenter implements AssetAddContract.Presenter {
         mRfidManager.closeDriver();
     }
 
+    /**
+     * 点击扫描按钮调用该方法
+     */
     @Override
     public void startScanRfid() {
+        //当RFID不在扫描时
         if (!mRfidManager.isScanning()) {
             mRfidManager.startScan();
             if (mDisposable != null && !mDisposable.isDisposed()) {
                 mDisposable.dispose();
             }
+            //Observable看得见的 interval间隔
             mDisposable = Observable.interval(200, TimeUnit.MILLISECONDS)
                     .compose(ObservableTransformerUtils.<Long>io_main())
-                    .subscribe(new Consumer<Long>() {
+                    .subscribe(new Consumer<Long>() {//订阅
                         @Override
                         public void accept(@NonNull Long aLong) throws Exception {
                             mView.showRfids(mRfidManager.getInventory());
