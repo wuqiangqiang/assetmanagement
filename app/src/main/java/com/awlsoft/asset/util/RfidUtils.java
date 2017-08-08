@@ -9,6 +9,11 @@ import com.awlsoft.asset.supernfc.reader.model.InventoryBuffer;
  */
 
 public class RfidUtils {
+    /**
+     *
+     * @param inventoryTagMap
+     * @return
+     */
     public static String parseRfidEPC(InventoryBuffer.InventoryTagMap inventoryTagMap) {
         if (inventoryTagMap == null || TextUtils.isEmpty(inventoryTagMap.strEPC)) {
             return null;

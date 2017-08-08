@@ -5,10 +5,12 @@ import android.support.annotation.NonNull;
 
 import com.awlsoft.asset.model.api.exception.ExceptionHandle;
 
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
+ * 实现rxjava 的Observer
  * Created by yejingxian on 2017/5/20.
  */
 
@@ -19,13 +21,22 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     }
 
+    /**
+     * Notifies the Observer that the {@link Observable} has experienced an error condition.
+     * <p>
+     * If the {@link Observable} calls this method, it will not thereafter 其后 call {@link #onNext} or
+     * {@link #onComplete}.
+     *
+     * @param e
+     *          the exception encountered by the Observable
+     */
     @Override
     public void onError(Throwable e) {
         // todo error somthing
         if (e instanceof ExceptionHandle.ResponeThrowable) {
-            onError((ExceptionHandle.ResponeThrowable) e);
+            onBaseError((ExceptionHandle.ResponeThrowable) e);
         } else {
-            onError(new ExceptionHandle.ResponeThrowable(e, ExceptionHandle.ERROR.UNKNOWN));
+            onBaseError(new ExceptionHandle.ResponeThrowable(e, ExceptionHandle.ERROR.UNKNOWN));
         }
     }
 
@@ -40,6 +51,6 @@ public abstract class BaseObserver<T> implements Observer<T> {
     }
 
 
-    public abstract void onError(ExceptionHandle.ResponeThrowable e);
+    public abstract void onBaseError(ExceptionHandle.ResponeThrowable e);
 
 }

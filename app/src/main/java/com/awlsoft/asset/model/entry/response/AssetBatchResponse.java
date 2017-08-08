@@ -20,8 +20,13 @@ public class AssetBatchResponse {
      */
     @DatabaseField
     private String batch_no;
+
     @DatabaseField
     private String name;
+
+    @DatabaseField
+    private String remark;
+    
     @DatabaseField(id = true)
     @Id
     private Long id;
@@ -30,10 +35,12 @@ public class AssetBatchResponse {
     }
 
 
-    @Generated(hash = 22619127)
-    public AssetBatchResponse(String batch_no, String name, Long id) {
+    @Generated(hash = 1394077896)
+    public AssetBatchResponse(String batch_no, String name, String remark,
+            Long id) {
         this.batch_no = batch_no;
         this.name = name;
+        this.remark = remark;
         this.id = id;
     }
 
@@ -68,5 +75,15 @@ public class AssetBatchResponse {
 
     public void setBatch_no(String batch_no) {
         this.batch_no = batch_no;
+    }
+
+
+    public String getRemark() {
+        return this.remark;
+    }
+
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

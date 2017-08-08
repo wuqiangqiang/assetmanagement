@@ -54,6 +54,7 @@ public class RfidManager {
 
     /**
      * 最大功率值
+     * end discrete 离散的
      */
     private int endDBM = 33;
 
@@ -140,6 +141,11 @@ public class RfidManager {
         }
     }
 
+    /**
+     * 设置RFID的输出功率
+     * @param dbm
+     * @return
+     */
     public boolean setOutputPower(int dbm){
         this.endDBM = dbm;
         byte btOutputPower = (byte) dbm;
@@ -158,16 +164,16 @@ public class RfidManager {
     }
 
     private synchronized void registerReceiver() {
-        IntentFilter itent = new IntentFilter();
-        itent.addAction(ReaderHelper.BROADCAST_REFRESH_FAST_SWITCH);
-        itent.addAction(ReaderHelper.BROADCAST_REFRESH_INVENTORY);
-        itent.addAction(ReaderHelper.BROADCAST_REFRESH_INVENTORY_REAL);
-        itent.addAction(ReaderHelper.BROADCAST_REFRESH_ISO18000_6B);
-        itent.addAction(ReaderHelper.BROADCAST_REFRESH_OPERATE_TAG);
-        itent.addAction(ReaderHelper.BROADCAST_REFRESH_READER_SETTING);
-        itent.addAction(ReaderHelper.BROADCAST_WRITE_LOG);
-        itent.addAction(ReaderHelper.BROADCAST_WRITE_DATA);
-        lbm.registerReceiver(mRecv, itent);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ReaderHelper.BROADCAST_REFRESH_FAST_SWITCH);
+        intentFilter.addAction(ReaderHelper.BROADCAST_REFRESH_INVENTORY);
+        intentFilter.addAction(ReaderHelper.BROADCAST_REFRESH_INVENTORY_REAL);
+        intentFilter.addAction(ReaderHelper.BROADCAST_REFRESH_ISO18000_6B);
+        intentFilter.addAction(ReaderHelper.BROADCAST_REFRESH_OPERATE_TAG);
+        intentFilter.addAction(ReaderHelper.BROADCAST_REFRESH_READER_SETTING);
+        intentFilter.addAction(ReaderHelper.BROADCAST_WRITE_LOG);
+        intentFilter.addAction(ReaderHelper.BROADCAST_WRITE_DATA);
+        lbm.registerReceiver(mRecv, intentFilter);
     }
 
     private final BroadcastReceiver mRecv = new BroadcastReceiver() {
@@ -225,6 +231,7 @@ public class RfidManager {
     }
 
     public synchronized void startScan() {
+        //判断如果没有开启或者正在扫描
         if (!opended || scanning) {
             return;
         }

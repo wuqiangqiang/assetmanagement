@@ -106,6 +106,7 @@ public abstract class BaseTaskActivity<T extends BaseTaskPresenter> extends Base
         mPresenter = providerPresenter();
         initView();
 
+        //editMode=true,未完成的
         if (editMode) {
             mPresenter.openDriver();
         } else {

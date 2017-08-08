@@ -17,6 +17,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
+ * 封装了调用网络接口的操作
  * Created by yejingxian on 2017/5/18.
  */
 
@@ -71,7 +72,8 @@ public class OperateManager {
      * @return
      */
     public Observable<String> uploadAsset(Map<String, String> parasm) {
-        return mService.uploadAssetAdd(parasm).map(this.filterFromBaseEntry(""))
+        return mService.uploadAssetAdd(parasm)
+                .map(this.filterFromBaseEntry(""))
                 .compose(ObservableTransformerUtils.<String>io_main())
                 .compose(ObservableTransformerUtils.<String>parseException());
     }

@@ -24,6 +24,7 @@ import retrofit2.http.Path;
 
 /**
  * Created by yejingxian on 2017/5/18.
+ * 定义请求接口
  */
 
 public interface SyncService {

@@ -58,7 +58,7 @@ public class LoginPresenter implements LoginContract.Presenter {
             }
         }).subscribe(new BaseObserver<UserResponse>() {
             @Override
-            public void onError(ExceptionHandle.ResponeThrowable e) {
+            public void onBaseError(ExceptionHandle.ResponeThrowable e) {
                 mView.loginFailure(e.getReason());
             }
 

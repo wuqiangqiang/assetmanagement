@@ -24,6 +24,10 @@ public class AssetAddPresenter implements AssetAddContract.Presenter {
     private AssetAddContract.View mView;
     private DBManager mDBManager;
     private RfidManager mRfidManager;
+    /**
+     * disposable 可任意处理的
+     *
+     */
     private Disposable mDisposable;
 
     public AssetAddPresenter(AssetAddContract.View mView, DBManager mDBManager, RfidManager mRfidManager) {

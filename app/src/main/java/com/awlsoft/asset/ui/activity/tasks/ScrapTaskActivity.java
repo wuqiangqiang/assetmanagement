@@ -23,6 +23,7 @@ import com.awlsoft.asset.util.TasksUtils;
 import java.util.List;
 
 /**
+ * scrap 废弃
  * Created by user on 2017/6/14.
  */
 
@@ -108,6 +109,7 @@ public class ScrapTaskActivity extends BaseTaskActivity<ScrapTaskContract.Presen
         taskTypeView = (TextView) findViewById(R.id.task_type);
         assetTypeView = (TextView) findViewById(R.id.task_asset_type);
         keeperView = (TextView) findViewById(R.id.task_asset_keeper);
+        //存放地点
         repositoryView = (TextView) findViewById(R.id.task_asset_repository);
         checkCountView = (TextView) findViewById(R.id.task_check_count);
         mTvSaveSite = (TextView) findViewById(R.id.tvSaveSite);

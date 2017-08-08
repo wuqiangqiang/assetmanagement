@@ -68,7 +68,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.add_asset:
-                intent = new Intent(this, AssetAddActivity.class);
+//                intent = new Intent(this, AssetAddActivity.class);
+                intent = new Intent(this, BatchActivity.class);
                 startActivityIfHasData(intent);
                 break;
             case R.id.find_asset:

@@ -2,7 +2,7 @@
 
 buildscript {
     repositories {
-        jcenter()
+        jcenter()//标准的Android代码库仓库，里面有很多开源的工具类和控件。各种开发资源
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'

@@ -148,6 +148,10 @@ public class TasksActivity extends BaseActivity implements TasksContract.View, T
 
     }
 
+    /**
+     * 在已经完成任务上的点击操作
+     * @param completedTask
+     */
     @Override
     public void onCompleteTaskClick(BaseTaskResponse completedTask) {
         mPresenter.openTaskDetails(completedTask);

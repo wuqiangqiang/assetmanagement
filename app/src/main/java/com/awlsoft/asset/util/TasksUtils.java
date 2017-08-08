@@ -48,6 +48,11 @@ public class TasksUtils {
         return count;
     }
 
+    /**
+     * 这样的封装有意思吗？到底是为了什么
+     * @param task
+     * @return
+     */
     public static boolean isTaskFinished(BaseTaskResponse task) {
         return task.isFinished();
     }
@@ -57,7 +62,13 @@ public class TasksUtils {
         return task.getTaskLabel();
     }
 
+    /**
+     * 获取任务编号
+     * @param task
+     * @return
+     */
     public static String getTaskId(BaseTaskResponse task) {
+        //precondition 前提
         Preconditions.checkNotNull(task, "task can not be null!");
         return task.getTaskId();
     }
@@ -67,18 +78,23 @@ public class TasksUtils {
         return task.getStatusCode();
     }
 
+    /**
+     * 处理任务
+     * @param context
+     * @param task
+     */
     public static void workWithTask(Context context, BaseTaskResponse task) {
         Preconditions.checkNotNull(task, "task can not be null!");
         Intent intent = null;
-        if (task instanceof ReceiveTaskResponse) {
+        if (task instanceof ReceiveTaskResponse) {//领用任务
             intent = new Intent(context, ReceiveTaskActivity.class);
-        } else if (task instanceof BorrowTaskResponse) {
+        } else if (task instanceof BorrowTaskResponse) {//借用任务
             intent = new Intent(context, BorrowTaskActivity.class);
-        } else if (task instanceof ScrapTaskResponse) {
+        } else if (task instanceof ScrapTaskResponse) {//报废任务
             intent = new Intent(context, ScrapTaskActivity.class);
-        } else if (task instanceof BreakageTaskResponse) {
+        } else if (task instanceof BreakageTaskResponse) {//报损任务
             intent = new Intent(context, BreakageTaskActivity.class);
-        } else if (task instanceof ReturnTaskResponse) {
+        } else if (task instanceof ReturnTaskResponse) {//归还任务
             intent = new Intent(context, ReturnTaskActivity.class);
         } else if (task instanceof AllocationTaskResponse) {
             intent = new Intent(context, AllocationTaskActivity.class);
@@ -89,10 +105,20 @@ public class TasksUtils {
         context.startActivity(intent);
     }
 
+    /**
+     * 查看已经完成的任务
+     * @param context
+     * @param task
+     */
     public static void openTaskDetail(Context context, BaseTaskResponse task) {
         workWithTask(context, task);
     }
 
+    /**
+     * 处理任务
+     * @param context
+     * @param task
+     */
     public static void startTask(Context context, BaseTaskResponse task) {
         workWithTask(context, task);
     }

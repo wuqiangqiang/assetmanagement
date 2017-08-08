@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * inventory 存货清单
  * Created by yejingxian on 2017/6/1.
  */
 

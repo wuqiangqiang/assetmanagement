@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.library'//把module设置为Android library，当做另外一个android项目的library
 
 android {
     compileSdkVersion 25

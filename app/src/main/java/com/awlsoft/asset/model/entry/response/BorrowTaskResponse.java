@@ -1,13 +1,8 @@
 package com.awlsoft.asset.model.entry.response;
 
-import android.support.annotation.IntDef;
-
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * Created by yejingxian on 2017/6/12.

@@ -2,10 +2,6 @@ package com.awlsoft.asset.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.ArraySet;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * PreferencesUtils, easy to get or put data

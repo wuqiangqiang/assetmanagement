@@ -26,7 +26,8 @@ public class AssetBatchResponseDao extends AbstractDao<AssetBatchResponse, Long>
     public static class Properties {
         public final static Property Batch_no = new Property(0, String.class, "batch_no", false, "BATCH_NO");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property Id = new Property(2, Long.class, "id", true, "_id");
+        public final static Property Remark = new Property(2, String.class, "remark", false, "REMARK");
+        public final static Property Id = new Property(3, Long.class, "id", true, "_id");
     }
 
 
@@ -44,7 +45,8 @@ public class AssetBatchResponseDao extends AbstractDao<AssetBatchResponse, Long>
         db.execSQL("CREATE TABLE " + constraint + "\"ASSET_BATCH_RESPONSE\" (" + //
                 "\"BATCH_NO\" TEXT," + // 0: batch_no
                 "\"NAME\" TEXT," + // 1: name
-                "\"_id\" INTEGER PRIMARY KEY );"); // 2: id
+                "\"REMARK\" TEXT," + // 2: remark
+                "\"_id\" INTEGER PRIMARY KEY );"); // 3: id
     }
 
     /** Drops the underlying database table. */
@@ -67,9 +69,14 @@ public class AssetBatchResponseDao extends AbstractDao<AssetBatchResponse, Long>
             stmt.bindString(2, name);
         }
  
+        String remark = entity.getRemark();
+        if (remark != null) {
+            stmt.bindString(3, remark);
+        }
+ 
         Long id = entity.getId();
         if (id != null) {
-            stmt.bindLong(3, id);
+            stmt.bindLong(4, id);
         }
     }
 
@@ -87,15 +94,20 @@ public class AssetBatchResponseDao extends AbstractDao<AssetBatchResponse, Long>
             stmt.bindString(2, name);
         }
  
+        String remark = entity.getRemark();
+        if (remark != null) {
+            stmt.bindString(3, remark);
+        }
+ 
         Long id = entity.getId();
         if (id != null) {
-            stmt.bindLong(3, id);
+            stmt.bindLong(4, id);
         }
     }
 
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2);
+        return cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3);
     }    
 
     @Override
@@ -103,7 +115,8 @@ public class AssetBatchResponseDao extends AbstractDao<AssetBatchResponse, Long>
         AssetBatchResponse entity = new AssetBatchResponse( //
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // batch_no
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2) // id
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // remark
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3) // id
         );
         return entity;
     }
@@ -112,7 +125,8 @@ public class AssetBatchResponseDao extends AbstractDao<AssetBatchResponse, Long>
     public void readEntity(Cursor cursor, AssetBatchResponse entity, int offset) {
         entity.setBatch_no(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setRemark(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
      }
     
     @Override

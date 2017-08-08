@@ -55,7 +55,7 @@ public class AssetAssociationUpload {
 
     private int upload_count = 8;
 
-    public static enum UploadTypes {
+    public enum UploadTypes {
         ASSET_ADD, INVENTORY_TASK,
         RECEIVE_TASK,BORROW_TASK,SCRAP_TASK,BREAKAGE_TASK,RETURN_TASK,ALLOCATION_TASK,
     }
@@ -92,7 +92,7 @@ public class AssetAssociationUpload {
     }
 
     //统计新增资产
-    private AtomicInteger mUploadAssetAll = new AtomicInteger();
+    private AtomicInteger mUploadAssetAll = new AtomicInteger();//待上传固定资产总数
     private AtomicInteger mUploadAssetFailure = new AtomicInteger();
     private AtomicInteger mUploadAssetSuccess = new AtomicInteger();
 
@@ -145,6 +145,9 @@ public class AssetAssociationUpload {
         }
     }
 
+    /**
+     * 上传新增的固定资产
+     */
     public void uploadAllAddAssetsNew() {
         mUploadAssetAll.set(0);
         mUploadAssetFailure.set(0);
@@ -162,12 +165,18 @@ public class AssetAssociationUpload {
         }
     }
 
+    /**
+     * 上传单个固定资产
+     * @param asset 从sqlite里获取的
+     */
     public void uploadAddAssetNew(final AssetAddBean asset) {
         Map<String,String> map = asset.generatorParams();
+
         RetrofitManager.getInstance().getOperateManager().uploadAsset(map).doFinally(new Action() {
             @Override
             public void run() throws Exception {
                 System.out.println("yjx uploadAsset-----------" + mUploadAssetSuccess.intValue() + "->" + mUploadAssetFailure.intValue() + "->" + mUploadAssetAll.intValue());
+
                 boolean success = (mUploadAssetSuccess.intValue() + mUploadAssetFailure.intValue()) == mUploadAssetAll.intValue();
                 if (success) {
                     if (mUploadAssetFailure.intValue() == 0) {
@@ -178,9 +187,9 @@ public class AssetAssociationUpload {
                     analysisResult();
                 }
             }
-        }).subscribe(new BaseObserver<String>() {
+        }).subscribe(new BaseObserver<String>() {//subscribe方法里参数 Observer类型对象
             @Override
-            public void onError(ExceptionHandle.ResponeThrowable e) {
+            public void onBaseError(ExceptionHandle.ResponeThrowable e) {
                 if (e.getCode() == ExceptionHandle.ERROR.SERVICE_ERROR) {
                     //提交失败，RFID已经使用过 从本地中删除
                     mManager.getDaoSession().getAssetAddBeanDao().delete(asset);
@@ -195,6 +204,7 @@ public class AssetAssociationUpload {
             public void onNext(@NonNull String s) {
                 //提交成功 从本地中删除
                 mManager.getDaoSession().getAssetAddBeanDao().delete(asset);
+                //返回的是新值（即加1后的值）
                 mUploadAssetSuccess.incrementAndGet();
             }
         });
@@ -271,10 +281,14 @@ public class AssetAssociationUpload {
         };
     }
 
+    /**
+     *
+     * @param asset
+     */
     public void uploadAddAsset(final AssetAddBean asset) {
         RetrofitManager.getInstance().getOperateManager().uploadAsset(asset.generatorParams()).subscribe(new BaseObserver<String>() {
             @Override
-            public void onError(ExceptionHandle.ResponeThrowable e) {
+            public void onBaseError(ExceptionHandle.ResponeThrowable e) {
                 if (e.getCode() == ExceptionHandle.ERROR.SERVICE_ERROR) {
                     //提交失败，RFID已经使用过 从本地中删除
                     mManager.getDaoSession().getAssetAddBeanDao().delete(asset);
@@ -344,7 +358,7 @@ public class AssetAssociationUpload {
                             }
 
                             @Override
-                            public void onError(ExceptionHandle.ResponeThrowable e) {
+                            public void onBaseError(ExceptionHandle.ResponeThrowable e) {
                                 System.out.println("yjx uploadAllInventoryAsset error-------------------" + e);
                                 if (e.getCode() == ExceptionHandle.ERROR.SERVICE_ERROR) {
                                     //提交失败,可能改资产已经盘点过 从本地中删除
@@ -365,7 +379,7 @@ public class AssetAssociationUpload {
     private void uploadInventoryAsset(final AssetFound asset) {
         RetrofitManager.getInstance().getOperateManager().uploadInventoryAsset(asset.getTaskId(), String.valueOf(asset.getAssetId()), mUser.getId()).subscribe(new BaseObserver<String>() {
             @Override
-            public void onError(ExceptionHandle.ResponeThrowable e) {
+            public void onBaseError(ExceptionHandle.ResponeThrowable e) {
                 if (e.getCode() == ExceptionHandle.ERROR.SERVICE_ERROR) {
                     //提交失败,可能改资产已经盘点过 从本地中删除
                     mManager.getDaoSession().getAssetFoundDao().deleteInTx(asset);
@@ -441,7 +455,7 @@ public class AssetAssociationUpload {
                             }
 
                             @Override
-                            public void onError(ExceptionHandle.ResponeThrowable e) {
+                            public void onBaseError(ExceptionHandle.ResponeThrowable e) {
                                 System.out.println("yjx uploadAllReceiveTask error-------------------" + e);
                                 if (e.getCode() == ExceptionHandle.ERROR.SERVICE_ERROR) {
                                     //提交失败,可能改资产已经盘点过 从本地中删除
@@ -513,7 +527,7 @@ public class AssetAssociationUpload {
                             }
 
                             @Override
-                            public void onError(ExceptionHandle.ResponeThrowable e) {
+                            public void onBaseError(ExceptionHandle.ResponeThrowable e) {
                                 System.out.println("yjx uploadAllBorrowTask error-------------------" + e);
                                 if (e.getCode() == ExceptionHandle.ERROR.SERVICE_ERROR) {
                                     //提交失败,可能改资产已经盘点过 从本地中删除
@@ -585,7 +599,7 @@ public class AssetAssociationUpload {
                             }
 
                             @Override
-                            public void onError(ExceptionHandle.ResponeThrowable e) {
+                            public void onBaseError(ExceptionHandle.ResponeThrowable e) {
                                 System.out.println("yjx uploadAllScrapTask error-------------------" + e);
                                 if (e.getCode() == ExceptionHandle.ERROR.SERVICE_ERROR) {
                                     //提交失败,可能改资产已经盘点过 从本地中删除
@@ -657,7 +671,7 @@ public class AssetAssociationUpload {
                             }
 
                             @Override
-                            public void onError(ExceptionHandle.ResponeThrowable e) {
+                            public void onBaseError(ExceptionHandle.ResponeThrowable e) {
                                 System.out.println("yjx uploadAllBreakageTask error-------------------" + e);
                                 if (e.getCode() == ExceptionHandle.ERROR.SERVICE_ERROR) {
                                     //提交失败,可能改资产已经盘点过 从本地中删除
@@ -686,6 +700,7 @@ public class AssetAssociationUpload {
         mUploadReturnSuccess.set(0);
         List<ReturnTaskResponse> tasks = mManager.getDaoSession().getReturnTaskResponseDao().queryBuilder().
                 where(ReturnTaskResponseDao.Properties.Status.eq(BaseTaskResponse.FINISHED)).list();
+
         if (tasks == null || tasks.isEmpty()) {
             //无完成状态的归还任务，不需要上传
             successType.add(UploadTypes.RETURN_TASK);
@@ -729,7 +744,7 @@ public class AssetAssociationUpload {
                             }
 
                             @Override
-                            public void onError(ExceptionHandle.ResponeThrowable e) {
+                            public void onBaseError(ExceptionHandle.ResponeThrowable e) {
                                 System.out.println("yjx uploadAllReturnTask error-------------------" + e);
                                 if (e.getCode() == ExceptionHandle.ERROR.SERVICE_ERROR) {
                                     //提交失败,可能改资产已经盘点过 从本地中删除
@@ -801,7 +816,7 @@ public class AssetAssociationUpload {
                                 }
 
                                 @Override
-                                public void onError(ExceptionHandle.ResponeThrowable e) {
+                                public void onBaseError(ExceptionHandle.ResponeThrowable e) {
                                     System.out.println("yjx uploadAllAllocationTask error-------------------" + e);
                                     if (e.getCode() == ExceptionHandle.ERROR.SERVICE_ERROR) {
                                         //提交失败,可能改资产已经盘点过 从本地中删除
@@ -850,7 +865,7 @@ public class AssetAssociationUpload {
                                 }
 
                                 @Override
-                                public void onError(ExceptionHandle.ResponeThrowable e) {
+                                public void onBaseError(ExceptionHandle.ResponeThrowable e) {
                                     System.out.println("yjx uploadAllAllocationTask error-------------------" + e);
                                     if (e.getCode() == ExceptionHandle.ERROR.SERVICE_ERROR) {
                                         //提交失败,可能改资产已经盘点过 从本地中删除
@@ -925,6 +940,10 @@ public class AssetAssociationUpload {
         return false;
     }
 
+    /**
+     * AssetAssociationUpload 的内部接口
+     * 在 SyncPresenter 中被实现
+     */
     public interface UploadCallback {
         void onNoUpload();
 

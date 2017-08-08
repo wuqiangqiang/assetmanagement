@@ -50,6 +50,7 @@ public class TasksPresenter implements TasksContract.Presenter{
     public void loadTasks(boolean forceUpdate) {
         loadTasks(forceUpdate, true);
     }
+
     private void loadTasks(final boolean forceUpdate, final boolean showLoadingUI) {
         if (showLoadingUI) {
             mView.setLoadingIndicator(true);
@@ -118,6 +119,11 @@ public class TasksPresenter implements TasksContract.Presenter{
                 });
     }
 
+    /**
+     * 处理任务
+     *
+     * @param tasks
+     */
     private void processTasks(List<BaseTaskResponse> tasks) {
         if (tasks.isEmpty()) {
             mView.showNoTasks();

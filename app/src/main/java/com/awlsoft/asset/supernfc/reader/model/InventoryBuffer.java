@@ -16,11 +16,20 @@ public class InventoryBuffer implements  Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 静态类
+	 */
 	public static class InventoryTagMap {
 		public String strPC;
 		public String strCRC;
+		/**
+		 * EPC的全称是Electronic Product Code，中文译作产品电子代码
+		 */
 		public String strEPC;
 		public byte btAntId;
+		/**
+		 * Received Signal Strength Indication接收的信号强度指示
+		 */
 		public String strRSSI;
 		public int nReadCount;
 		public String strFreq;
@@ -28,19 +37,6 @@ public class InventoryBuffer implements  Serializable {
 		public int nAnt2;
 		public int nAnt3;
 		public int nAnt4;
-		
-		
-		
-		@Override
-		public String toString() {
-			return "InventoryTagMap [strPC=" + strPC + ", strCRC=" + strCRC
-					+ ", strEPC=" + strEPC + ", btAntId=" + btAntId
-					+ ", strRSSI=" + strRSSI + ", nReadCount=" + nReadCount
-					+ ", strFreq=" + strFreq + ", nAnt1=" + nAnt1 + ", nAnt2="
-					+ nAnt2 + ", nAnt3=" + nAnt3 + ", nAnt4=" + nAnt4 + "]";
-		}
-
-
 
 		public InventoryTagMap() {
 			strPC = "";
@@ -55,7 +51,17 @@ public class InventoryBuffer implements  Serializable {
 			nAnt3 = 0;
 			nAnt4 = 0;
 		}
-    }
+
+		@Override
+		public String toString() {
+			return "InventoryTagMap [strPC=" + strPC + ", strCRC=" + strCRC
+					+ ", strEPC=" + strEPC + ", btAntId=" + btAntId
+					+ ", strRSSI=" + strRSSI + ", nReadCount=" + nReadCount
+					+ ", strFreq=" + strFreq + ", nAnt1=" + nAnt1 + ", nAnt2="
+					+ nAnt2 + ", nAnt3=" + nAnt3 + ", nAnt4=" + nAnt4 + "]";
+		}
+
+	}
 
 	public byte btRepeat;
 	public byte btSession;
@@ -65,8 +71,10 @@ public class InventoryBuffer implements  Serializable {
 	public byte btStayA, btStayB, btStayC, btStayD;
 	public byte btInterval;
 	public byte btFastRepeat;
-	
-	
+
+	/**
+	 * antenna 天线
+	 */
 	public ArrayList<Byte> lAntenna;
 	public boolean bLoopInventory;
 	public int nIndexAntenna;

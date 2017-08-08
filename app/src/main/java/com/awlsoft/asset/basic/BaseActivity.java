@@ -22,6 +22,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     *
+     * 显示进度条
+     * @param title
+     */
     public void showProgressDialog(String title) {
         if (null == mProgressDialog) {
             mProgressDialog = new ProgressDialog(this);

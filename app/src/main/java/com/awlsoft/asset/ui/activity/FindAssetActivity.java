@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.awlsoft.asset.R;
 import com.awlsoft.asset.RfidManager;
@@ -29,7 +28,6 @@ import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by user on 2017/6/12.
@@ -38,26 +36,46 @@ import java.util.Random;
 public class FindAssetActivity extends BaseActivity implements View.OnClickListener{
     private RadarView mRadarView;
 
+    /**
+     * 用户输入的RFID编号
+     */
     private EditText mEtInputID;
     private Button mBtnOK;
 
     private LinearLayout mLlRFID;
     private TextView mTvRFID;
     private TextView mTvAssetName;
-
+    /**
+     * 功率拖拉条
+     */
     private DiscreteSeekBar mDsbPower;
 
     private Button mBtnSearch;
     private RfidManager mRfidManager;
+    /**
+     * 当点击查找按钮时，mIsSearching = true
+     */
     private boolean mIsSearching = false;
     private Handler mHandler = new Handler();
+    /**
+     * 全局变量：有发现
+     *
+     */
     private boolean hasFound = false;
 
+    /**
+     * 扫描线程
+     *
+     */
     private Runnable mSearchRunnable = new Runnable() {
         @Override
         public void run() {
             List<InventoryBuffer.InventoryTagMap> list = new ArrayList<>();
             list.addAll(mRfidManager.getInventory());
+            /**
+             * Runable中的局部变量，初始值是false
+             *
+             */
             boolean isFound = false;
             int rssi = 0;
             System.out.println("yjx find asset found size:"+list.size());
@@ -75,7 +93,7 @@ public class FindAssetActivity extends BaseActivity implements View.OnClickListe
             }
 
             if(isFound){
-                mRadarView.setRadarSpeed(rssi / 10 - 4);
+                mRadarView.setRadarSpeed(rssi / 10 - 4);//radar 雷达
                 SoundPlay.getInstance(FindAssetActivity.this).setSpeed(rssi);
             }
 
@@ -89,7 +107,7 @@ public class FindAssetActivity extends BaseActivity implements View.OnClickListe
 
             if(mIsSearching){
                 mRfidManager.clearInventory();
-                mHandler.postDelayed(mSearchRunnable,500);
+                mHandler.postDelayed(mSearchRunnable,500);//0.5秒的定时器
             }
         }
     };
@@ -140,6 +158,12 @@ public class FindAssetActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
+    /**
+     * the system is temporarily destroying this instance of the activity to save space.
+     * 系统销毁了这个Activity的实例在内存中占据的空间。
+     * 在Activity的生命周期中，onDestory()方法是他生命的最后一步，资源空间等就被回收了。
+     * 当重新进入此Activity的时候，必须重新创建，执行onCreate()方法
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -148,7 +172,11 @@ public class FindAssetActivity extends BaseActivity implements View.OnClickListe
         mRfidManager.closeDriver();
     }
 
+    /**
+     * 点击查找按钮
+     */
     private void startFind(){
+        //判断如果当前不在查找
         if(mIsSearching == false){
             mIsSearching = true;
             mRfidManager.startScan();
@@ -156,12 +184,18 @@ public class FindAssetActivity extends BaseActivity implements View.OnClickListe
             mHandler.removeCallbacks(mSearchRunnable);
             mHandler.post(mSearchRunnable);
             //直到找到标签才开始播放声音
-            //SoundPlay.getInstance(FindAssetActivity.this).playSound();
+            SoundPlay.getInstance(FindAssetActivity.this).playSound();
         }
     }
+
+    /**
+     * 移除查找线程
+     * 关闭声音
+     */
     private void stopFind(){
         if(mIsSearching){
             mIsSearching = false;
+            //关闭定时器
             mHandler.removeCallbacks(mSearchRunnable);
             mRadarView.setSearching(false);
             SoundPlay.getInstance(FindAssetActivity.this).stopSound();
@@ -179,6 +213,10 @@ public class FindAssetActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
+    /**
+     * 在SQLite中搜索到输入的RFID
+     * @param asset
+     */
     private void showAsset(AssetResponse asset){
         mTvRFID.setText(asset.getRfid_code());
         mTvAssetName.setText(asset.getName());
@@ -187,8 +225,9 @@ public class FindAssetActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.btnOK:
+            case R.id.btnOK://输入RFID后点击“确定”按钮
                 AssetResponse asset = null;
+                //trim():Returns a copy of the string, with leading and trailing whitespace omitted.省略omit
                 if(!mEtInputID.getText().toString().trim().equals("")){
                     try {
                         asset = DBManager.getInstance(this).getDaoSession().getAssetResponseDao()

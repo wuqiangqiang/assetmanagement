@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -47,7 +45,7 @@ import java.util.List;
  * Created by yejingxian on 2017/5/17.
  */
 
-public class AssetAddActivity extends BaseActivity implements AssetAddContract.View, View.OnClickListener {
+public class BatchAddActivity extends BaseActivity implements AssetAddContract.View, View.OnClickListener {
 
     private EditText mAssetName, mDurableYears, mPrice;
     private TextView mAssetBatch, mBrandName, mCategoryGbName, mCategoryName, mModelName, mBuyDate;
@@ -65,7 +63,7 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
      */
     private BrandResponse mBrand;
     private String mBuyDay;
-    private String mBatchNo,mAutoBatch;
+    private String mAutoBatch;
 
     private RfidManager rfidManager;
     private AssetAddContract.Presenter mPresenter;
@@ -78,7 +76,7 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_asset_add);
+        setContentView(R.layout.activity_batch_add);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -140,8 +138,7 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
         mListView.setAdapter(mAdapter);
 
         //设置 批次号 编辑框
-        mBatchNo = getIntent().getStringExtra("batch_no");
-        mAssetBatch.setText(mBatchNo);
+        mAssetBatch.setText(getIntent().getStringExtra("batch_no"));
         mAssetBatch.setEnabled(false);
 
     }
@@ -222,7 +219,7 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
     }
 
     private void selectAllRfid() {
-        for (WrapInventoryTagMap tag : mInventoryTagMaps) {
+        for(WrapInventoryTagMap tag : mInventoryTagMaps){
             tag.checked = true;
         }
         mAdapter.notifyDataSetChanged();
@@ -258,11 +255,10 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
             }
         }
 
-//        if (TextUtils.isEmpty(mAutoBatch) && mBatch == null) {
-//            showToast("请选择批次号!");
-//            return;
-//        } else
-        if (TextUtils.isEmpty(mAssetName.getText())) {
+        if (TextUtils.isEmpty(mAutoBatch) && mBatch == null) {
+            showToast("请选择批次号!");
+            return;
+        } else if (TextUtils.isEmpty(mAssetName.getText())) {
             showToast("请填写资产名!");
             return;
         } else if (TextUtils.isEmpty(mDurableYears.getText())) {
@@ -292,14 +288,12 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
         }
 
         final List<AssetAddBean> assetAdd = new ArrayList<>();
-
         new AlertDialog.Builder(this).setCancelable(false).setTitle("是否绑定以下标签?")
-                .setItems(checkRfid.toArray(new String[checkRfid.size()]), null)
-                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                .setItems(checkRfid.toArray(new String[checkRfid.size()]), null).setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 for (String rfid : checkRfid) {
-                    assetAdd.add(new AssetAddBean(mAssetName.getText().toString(), mBatchNo,
+                    assetAdd.add(new AssetAddBean(mAssetName.getText().toString(), TextUtils.isEmpty(mAutoBatch) ? mBatch.getBatchNo() : mAutoBatch,
                             rfid, mBrand.getId().intValue(), mCategory.getId().intValue(),
                             mCategoryGb.getId().intValue(), mModel.getId().intValue(),
                             Double.valueOf(mPrice.getText().toString()), user.getOfficeId(),
@@ -308,8 +302,7 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
                 mPresenter.saveAssets(assetAdd);
                 finish();
             }
-        })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -338,37 +331,35 @@ public class AssetAddActivity extends BaseActivity implements AssetAddContract.V
 
     /**
      * 实现View中的抽象方法，并在Presenter类中被调用
-     *
      * @param assetBatchResponseList
      */
     @Override
     public void showBatch(final List<AssetBatchResponse> assetBatchResponseList) {
         new AlertDialog.Builder(this)
                 .setAdapter(new CommonAdapter<AssetBatchResponse>(this, assetBatchResponseList, android.R.layout.simple_list_item_1) {
-                    @Override
-                    public void convert(ViewHolder holder, AssetBatchResponse assetBatchResponse) {
-                        holder.setText(android.R.id.text1, assetBatchResponse.getBatchNo());
-                    }
-                }, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        mAutoBatch = null;
-                        mBatch = assetBatchResponseList.get(i);
-                        mAssetBatch.setText(mBatch.getBatchNo());
-                    }
-                })
+            @Override
+            public void convert(ViewHolder holder, AssetBatchResponse assetBatchResponse) {
+                holder.setText(android.R.id.text1, assetBatchResponse.getBatchNo());
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mAutoBatch = null;
+                mBatch = assetBatchResponseList.get(i);
+                mAssetBatch.setText(mBatch.getBatchNo());
+            }
+        })
                 .setPositiveButton("自动生成", new DialogInterface.OnClickListener() {//positive 积极的、正数
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        mAutoBatch = String.valueOf(System.currentTimeMillis());
-                        mAssetBatch.setText(mAutoBatch);
-                    }
-                }).show();
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mAutoBatch = String.valueOf(System.currentTimeMillis());
+                mAssetBatch.setText(mAutoBatch);
+            }
+        }).show();
     }
 
     /**
      * View中的抽象方法，该实现在Presenter类的loadBrand方法中被调用
-     *
      * @param brand
      */
     @Override

@@ -12,6 +12,10 @@ import com.awlsoft.asset.R;
  */
 
 public class SoundPlay {
+
+    /**
+     * SoundPool使用音效池的概念来管理多个短促的音效，例如它可以开始就加载20个音效，以后在程序中按音效的ID进行播放
+     */
     private SoundPool mSoundPool;
     private int loadId;
     private int playId;
@@ -36,6 +40,7 @@ public class SoundPlay {
 
     private SoundPlay(Context context){
         mContext = context;
+        //第一个参数指定支持多少个声音；第二个参数指定声音类型：第三个参数指定声音品质。
         mSoundPool = new SoundPool(1,AudioManager.STREAM_MUSIC,5);
         loadId = mSoundPool.load(context,R.raw.tip02,1);
     }
@@ -50,9 +55,14 @@ public class SoundPlay {
         mSoundPlay = null;
     }
 
+    /**
+     * 设置声音频率
+     * @param value
+     */
     public void setSpeed(int value){
         mTime = getPlaySpeed(value);
     }
+
     private int getPlaySpeed(int value){
         if(value < 50){
             return 2000;

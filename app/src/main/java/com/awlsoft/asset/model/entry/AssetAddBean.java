@@ -70,6 +70,10 @@ public class AssetAddBean {
     }
 
 
+    /**
+     * 将对象属性装配到HashMap中
+     * @return
+     */
     public Map<String, String> generatorParams(){
         Map<String, String> params = new HashMap<>();
         params.put("name",name);

@@ -1,8 +1,8 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'//Android APP插件（打包得到的是.apk文件）
 apply plugin: 'org.greenrobot.greendao'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 22
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.awlsoft.asset"
@@ -14,7 +14,7 @@ android {
     }
 
     greendao {
-        schemaVersion 1 //指定数据库schema版本号，迁移等操作会用到;
+        schemaVersion 2 //指定数据库schema版本号，迁移等操作会用到;
         daoPackage 'com.awlsoft.asset.orm.greendao' //dao的包名，包名默认是entity所在的包；
         /**
          * GreenDao实体类包文件夹
@@ -22,6 +22,7 @@ android {
         targetGenDir 'src/main/java'
     }
 
+    //配置签名信息
     signingConfigs {
         release {
             keyAlias 'builder'
@@ -43,6 +44,8 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    //设置编译的相关属性
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
@@ -64,12 +67,18 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.okhttp3:okhttp:3.8.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    /**
+     * 是第三方jar包，gradle构建时若发现本地没有该jar包则会去联网到中央仓库下载rxbinding 0.4.0的jar包，
+     * 在window系统上会将该jar包放在：
+     * C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\io.reactivex.rxjava2\rxjava\2.1.0
+     * 这个目录下;  若发现本地已经有了则直接使用。
+     */
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.j256.ormlite:ormlite-android:5.0'
     compile 'org.greenrobot:greendao:3.2.2'
     compile 'org.adw.library:discrete-seekbar:1.0.1'
+    //discrete离散的 seek寻找 seekbar拖动条
     compile 'com.google.guava:guava:18.0'
-
     compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
 }

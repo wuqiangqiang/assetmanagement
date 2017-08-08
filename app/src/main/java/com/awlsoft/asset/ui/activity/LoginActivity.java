@@ -19,6 +19,7 @@ import com.awlsoft.asset.R;
 import com.awlsoft.asset.basic.AppSettings;
 import com.awlsoft.asset.basic.BaseActivity;
 import com.awlsoft.asset.contract.LoginContract;
+import com.awlsoft.asset.model.api.Constant;
 import com.awlsoft.asset.model.entry.ComImgTextInfo;
 import com.awlsoft.asset.model.entry.response.UserResponse;
 import com.awlsoft.asset.ui.adapter.CommCallBack;
@@ -54,6 +55,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         mServer = (EditText) findViewById(R.id.server_address);
         //读取保存的服务器地址
         mServer.setText(AppSettings.getServerAddress(this));
+        mServer.setText("221.131.145.100:8080");
 
         mUiChangeUserName = (ImageView) findViewById(R.id.ui_change_user_name);
 

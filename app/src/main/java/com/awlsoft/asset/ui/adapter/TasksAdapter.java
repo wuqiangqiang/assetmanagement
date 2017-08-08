@@ -19,6 +19,10 @@ public class TasksAdapter extends CommonAdapter<BaseTaskResponse> {
 
     public interface TaskItemListener {
 
+        /**
+         * 方法体为空
+         * @param clickedTask
+         */
         void onTaskClick(BaseTaskResponse clickedTask);
 
         void onCompleteTaskClick(BaseTaskResponse completedTask);
@@ -46,6 +50,7 @@ public class TasksAdapter extends CommonAdapter<BaseTaskResponse> {
         holder.setOnClickListener(R.id.task_open, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //判断任务是否完成
                 if (TasksUtils.isTaskFinished(task)) {
                     mItemListener.onCompleteTaskClick(task);
                 } else {

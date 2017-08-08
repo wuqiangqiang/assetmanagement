@@ -43,6 +43,10 @@ public interface AssetAddContract {
      * 由专门的Presenter类去实现
      */
     interface Presenter extends BasePresenter {
+        /**
+         * 保存资产到本地数据库
+         * @param assets
+         */
         void saveAssets(List<AssetAddBean> assets);
         void openDriver();
         void closeDriver();

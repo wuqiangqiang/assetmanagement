@@ -5,6 +5,7 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
+ * 归还任务
  * Created by yejingxian on 2017/6/12.
  */
 @Entity

@@ -2,7 +2,6 @@ package com.awlsoft.asset.util;
 
 
 import com.awlsoft.asset.model.api.exception.ExceptionHandle;
-import com.awlsoft.asset.model.entry.BaseEntry;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -18,6 +17,11 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ObservableTransformerUtils {
 
+    /**
+     * ObservableTransformer 被观察者 促使变化的人
+     * @param <T>
+     * @return
+     */
     public static <T> ObservableTransformer<T, T> io_main() {
 
         return new ObservableTransformer<T, T>() {

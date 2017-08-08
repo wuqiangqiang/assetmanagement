@@ -144,7 +144,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<List<AdminResponse>>io_io())
                 .subscribe(new BaseObserver<List<AdminResponse>>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -175,7 +175,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<KeeperListResponse>io_io())
                 .subscribe(new BaseObserver<KeeperListResponse>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -209,7 +209,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<List<DepartmentResponse>>io_io())
                 .subscribe(new BaseObserver<List<DepartmentResponse>>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -240,7 +240,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<List<WorkareaResponse>>io_io())
                 .subscribe(new BaseObserver<List<WorkareaResponse>>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -271,7 +271,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<AssetNatureResponse>io_io())
                 .subscribe(new BaseObserver<AssetNatureResponse>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -314,7 +314,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<AssetBatchListResponse>io_io())
                 .subscribe(new BaseObserver<AssetBatchListResponse>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -347,7 +347,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<AssetListResponse>io_io())
                 .subscribe(new BaseObserver<AssetListResponse>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -380,7 +380,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<InventoryListResponse>io_io())
                 .subscribe(new BaseObserver<InventoryListResponse>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -413,7 +413,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<BaseListEntry<ReceiveTaskResponse>>io_io())
                 .subscribe(new BaseObserver<BaseListEntry<ReceiveTaskResponse>>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -447,7 +447,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<BaseListEntry<BorrowTaskResponse>>io_io())
                 .subscribe(new BaseObserver<BaseListEntry<BorrowTaskResponse>>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -481,7 +481,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<BaseListEntry<ScrapTaskResponse>>io_io())
                 .subscribe(new BaseObserver<BaseListEntry<ScrapTaskResponse>>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -516,7 +516,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<BaseListEntry<BreakageTaskResponse>>io_io())
                 .subscribe(new BaseObserver<BaseListEntry<BreakageTaskResponse>>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -551,7 +551,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<BaseListEntry<ReturnTaskResponse>>io_io())
                 .subscribe(new BaseObserver<BaseListEntry<ReturnTaskResponse>>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -586,7 +586,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<BaseListEntry<AllocationTaskResponse>>io_io())
                 .subscribe(new BaseObserver<BaseListEntry<AllocationTaskResponse>>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
@@ -621,7 +621,7 @@ public class AssetAssociationCache {
                 .compose(ObservableTransformerUtils.<BaseListEntry<AllocationTaskResponse>>io_io())
                 .subscribe(new BaseObserver<BaseListEntry<AllocationTaskResponse>>() {
                     @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
+                    public void onBaseError(ExceptionHandle.ResponeThrowable e) {
 
                     }
 
